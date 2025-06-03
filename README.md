@@ -2,7 +2,7 @@
 
 ## Features
 
-Exits vim extension inserte mode when changing editor tab or when the window loses focus.
+Exits vim extension insert mode when changing editor tab or when the window loses focus.
 
 ## Requirements
 
@@ -13,5 +13,8 @@ Exits vim extension inserte mode when changing editor tab or when the window los
 ### 0.0.1
 
 Initial release
-Will exit insert mode when changing tab and when the window blurs. No configuration possible
+Will exit insert mode when changing tab and when the window blurs. 
+Can be configured to exit insert mode when
+* The window loses focus
+* The focused text editor changes
 

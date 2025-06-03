@@ -17,7 +17,24 @@
   ],
   "main": "./dist/extension.js",
   "repository": {},
-  "contributes": {},
+  "contributes": {
+    "configuration": {
+      "title": "Exit insert mode on blur",
+      "type": "object",
+      "properties": {
+        "exitInsertModeOnblur.exitOnFocusLost": {
+          "type": "boolean",
+          "default": true,
+          "description": "Wether or not to to exit insert mode when the VS Code window loses focus"
+        },
+        "exitInsertModeOnblur.exitOnTabChange": {
+          "type": "boolean",
+          "default": true,
+          "description": "Wether or not to exit insert mode when changing text editor"
+        }
+      }
+    }
+  },
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "webpack",

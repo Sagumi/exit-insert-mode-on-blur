@@ -7,14 +7,21 @@ import * as vscode from 'vscode';
 export function activate(context: vscode.ExtensionContext) {
 	let lastEditor: vscode.TextEditor | undefined;
 
-	const disposable = vscode.commands.registerCommand('extension.vim_exit_insertmode_onblur', () => {
+	const disposable = vscode.commands.registerCommand('extension.exitInsertModeOnblur', () => {
 		vscode.window.onDidChangeWindowState((state: vscode.WindowState) => {
-			if (!state.focused) {
+			const config = vscode.workspace.getConfiguration('exitInsertModeOnblur');
+			const exitOnFocusLost = config.get('exitOnFocusLost');
+
+			if (!state.focused && exitOnFocusLost) {
 				vscode.commands.executeCommand('extension.vim_escape');
 			}
 		});
+
 		vscode.window.onDidChangeActiveTextEditor((editor: vscode.TextEditor | undefined) => {
-			if (lastEditor !== editor) {
+			const config = vscode.workspace.getConfiguration('exitInsertModeOnblur');
+			const exitOnTabChange = config.get('exitOnTabChange');
+
+			if (lastEditor !== editor && exitOnTabChange) {
 				vscode.commands.executeCommand('extension.vim_escape');
 				lastEditor = editor;
 			}
@@ -22,7 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	context.subscriptions.push(disposable);
-	vscode.commands.executeCommand('extension.vim_exit_insertmode_onblur');
+	vscode.commands.executeCommand('extension.exitInsertModeOnblur');
 }
 exports.activate = activate;
 
